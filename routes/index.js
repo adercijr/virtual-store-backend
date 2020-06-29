@@ -1,7 +1,14 @@
-/** @param { import('express').Express} app */
-
 module.exports = app => {
-    app.get('/', (req, res) => {
-        res.send('Você chamou a rota raiz!')
-    })
+
+    app.route('/users')      
+        .get(app.api.user.get)
+        .post(app.api.user.save)   
+
+    app.route('/categories')
+        .get(app.api.category.get)
+        .post(app.api.category.save)        
+
+    app.route('/categories/:id')
+        .get(app.api.category.getById)
+        .delete(app.api.category.remove)
 }
