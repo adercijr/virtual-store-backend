@@ -47,6 +47,6 @@ module.exports = app => {
         }
     }
 
-    return { save, get, remove}
+    return { save, get, remove }
 
 }
