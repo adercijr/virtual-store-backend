@@ -23,4 +23,12 @@ module.exports = app => {
     app.route('/navHeaderPrincipal/:id')
         .delete(app.api.Layout.navHeaderPrincipal.remove)
         .put(app.api.Layout.navHeaderPrincipal.save)
+
+    app.route('/navHeaderSide')
+        .get(app.api.Layout.navHeaderSide.get)
+        .post(app.api.Layout.navHeaderSide.save)
+
+    app.route('/navHeaderSide/:id')
+        .delete(app.api.Layout.navHeaderSide.remove)
+        .put(app.api.Layout.navHeaderSide.save)
 }
