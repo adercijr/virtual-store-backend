@@ -1,4 +1,4 @@
-// require('dotenv').config()
+require('dotenv').config()
 const express = require('express')
 const consign = require('consign')
 const db = require('./database/index')
@@ -12,7 +12,7 @@ consign()
     .then('./routes')
     .into(app)
 
-    
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Servidor rodando...')
+const port = process.env.PORT || 3000;  
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta`, port)
 })
