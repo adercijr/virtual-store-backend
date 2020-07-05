@@ -13,6 +13,6 @@ consign()
     .into(app)
 
     
-app.listen(process.env.APP_PORT || 3001, () => {
+app.listen(41890, () => {
     console.log('Servidor rodando...')
 })
