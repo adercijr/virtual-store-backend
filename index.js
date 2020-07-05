@@ -13,6 +13,6 @@ consign()
     .into(app)
 
     
-app.listen(41890, () => {
+app.listen(3000, () => {
     console.log('Servidor rodando...')
 })
