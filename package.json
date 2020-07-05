@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "npm cache clear --force",
     "start": "pm2 start index.js"
   },
   "keywords": [],
