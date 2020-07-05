@@ -29,21 +29,19 @@ module.exports = app => {
     }
 
     const withPath = categories => {
-
         const getParent = (categories, parentId) => {
             const parent = categories.filter(parent => parent.id === parentId)
-            return parent.length ? parent[0] : null
+            return parent.length ? parent[0] : null 
         }
-
         const categoriesWithPath = categories.map(category => {
             let path = category.name
-            let parent = getParent(categories, category.parentId)
+            let parent = getParent(categories, category.parentId) 
 
-            while(parent){
+            while(parent) {
                 path = `${parent.name} > ${path}`
                 parent = getParent(categories, parent.parentId)
             }
-            return {...category, path}
+            return { ...category, path }
         })
 
         categoriesWithPath.sort((a, b) => {
@@ -56,14 +54,7 @@ module.exports = app => {
 
     const get = (req, res) => {
         app.db('categories')
-            .select('name')
-            .then(cat => res.json(cat))
-            .catch(err => res.status(500).send(err))
-    }
-    const getWithPath = (req, res) => {
-        app.db('categories')
-            .select('name')
-            .then(cat => res.json(withPath(cat)))
+            .then(categories => res.json(withPath(categories)))
             .catch(err => res.status(500).send(err))
     }
 
@@ -97,7 +88,24 @@ module.exports = app => {
         }
     }
 
+    // criar arvore da lista de categorias
+    const toTree = (categories, tree) => {
+        if(!tree) tree = categories.filter(c => !c.parentId)         
+        tree = tree.map(parentNode => {
+            const isChild = node => node.parentId == parentNode.id
+            parentNode.children = toTree(categories, categories.filter(isChild)) 
+            return parentNode
+        })
+        return tree
+    }
+    // starta a arvore
+    const getTree = (req, res) => {
+        app.db('categories')
+            .then(categories => res.json(toTree(categories)))
+            .catch(err => res.status(500).send(err))
+    }
+
     
 
-    return { get, getById, save, remove, getWithPath }
+    return { get, getById, save, remove, getTree }
 }
