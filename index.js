@@ -1,4 +1,4 @@
-require('dotenv').config()
+// require('dotenv').config()
 const express = require('express')
 const consign = require('consign')
 const db = require('./database/index')
