@@ -24,11 +24,19 @@ module.exports = app => {
         .delete(app.api.Layout.navHeaderPrincipal.remove)
         .put(app.api.Layout.navHeaderPrincipal.save)
 
-    app.route('/navHeaderSide')
+    app.route('/navHeaderAside')
         .get(app.api.Layout.navHeaderSide.get)
         .post(app.api.Layout.navHeaderSide.save)
 
-    app.route('/navHeaderSide/:id')
+    app.route('/navHeaderAside/:id')
         .delete(app.api.Layout.navHeaderSide.remove)
         .put(app.api.Layout.navHeaderSide.save)
+
+    app.route('/navHeaderSecondary')
+        .get(app.api.Layout.navHeaderSecondary.get)
+        .post(app.api.Layout.navHeaderSecondary.save)
+
+    app.route('/navHeaderSecondary/:id')
+        .delete(app.api.Layout.navHeaderSecondary.remove)
+        .put(app.api.Layout.navHeaderSecondary.save)
 }

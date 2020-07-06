@@ -7,20 +7,20 @@ module.exports = app => {
         if(req.params.id) navs.id = req.params.id
         
         try {
-            existsOrError(navs.span, 'Navegação não informada')
+            existsOrError(navs.name, 'Navegação não informada')
 
         } catch(msg){
             return res.status(400).send(msg)
         }   
 
         if(navs.id){            
-            app.db('navHeaderAside')
+            app.db('navHeaderSecondary')
                 .update(navs)
                 .where({ id: navs.id })
                 .then(_ => res.status(204).send())
                 .catch(err => res.send(500).send(err))
         } else {
-            app.db('navHeaderAside')
+            app.db('navHeaderSecondary')
                 .insert(navs)
                 .then(_ => res.status(204).send())
                 .catch(err => res.send(500).send(err))
@@ -28,7 +28,7 @@ module.exports = app => {
     }
 
     const get = (req, res) => {
-        app.db('navHeaderAside')
+        app.db('navHeaderSecondary')
             .then(navs => res.json(navs))
             .catch(err => res.status(500).send(err))
     }
@@ -37,7 +37,7 @@ module.exports = app => {
         try {
             existsOrError(req.params.id, 'Código da Navegação não informado.')        
 
-            const rowsDeleted = await app.db('navHeaderAside')
+            const rowsDeleted = await app.db('navHeaderSecondary')
                 .where({ id: req.params.id }).del()
             existsOrError(rowsDeleted, 'Categoria não foi encontrada.')
 
@@ -47,6 +47,6 @@ module.exports = app => {
         }
     }
 
-    return { save, get, remove}
+    return { save, get, remove }
 
 }
