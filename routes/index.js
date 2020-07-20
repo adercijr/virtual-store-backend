@@ -1,15 +1,15 @@
 module.exports = app => {
 
-    app.route('/users')      
+    app.route('/users')
         .get(app.api.user.get)
-        .post(app.api.user.save)   
+        .post(app.api.user.save)
 
     app.route('/categories')
         .get(app.api.category.get)
-        .post(app.api.category.save)     
+        .post(app.api.category.save)
 
     app.route('/categories/tree')
-        .get(app.api.category.getTree)       
+        .get(app.api.category.getTree)
 
     app.route('/categories/:id')
         .get(app.api.category.getById)
@@ -39,4 +39,6 @@ module.exports = app => {
     app.route('/navHeaderSecondary/:id')
         .delete(app.api.Layout.navHeaderSecondary.remove)
         .put(app.api.Layout.navHeaderSecondary.save)
+
+   
 }

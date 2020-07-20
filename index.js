@@ -6,12 +6,14 @@ const db = require('./database/index')
 const app = express()
 app.db = db
 
+
 consign()
     .then('./config')
     .then('./api')
     .then('./routes')
     .into(app)
 
+// para teste - const port = process.env.APP_PORT || 3000;  
 const port = process.env.APP_PORT || 3000;  
 app.listen(port, () => {
     console.log(`Servidor rodando na porta`, port)
